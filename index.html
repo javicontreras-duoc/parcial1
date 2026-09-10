@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The One Page - Home</title>
+</head>
+<body>
+    <!-- Encabezado y Navegación Principal -->
+    <header class="header-main">
+        <div class="logo-container">
+            <a href="index.html" class="brand-logo">📖 The One Page</a>
+        </div>
+
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="productos.html"></a>Productos</li>
+                <li><a href="nosotros.html"></a>Nosotros</li>
+                <li><a href="blogs.html"></a>Blogs</li>
+                <li><a href="contacto.html"></a>Contacto</li>
+            </ul>
+        </nav>
+
+        <div class="user-cart-actions">
+            <a href="login.html" class="btn-link">Iniciar sesión</a>
+            <a href="registro.html" class="btn-link">Registrarse</a>
+            <a href="carrito.html" class="cart-btn">🛒 Cart (<span id="cart-count">0</span>)</a>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+        <!-- Banner Principal / Presentación -->
+        <section class="hero-banner">
+            <div class="hero-text">
+                <h1>The One Page - Tienda Online</h1>
+                <p>Explora nuestro catálogo de mangas.</p>
+                <a href="productos.html" class="btn-primary">Ver productos</a>
+            </div>
+        </section>
+
+    <!-- Lista de Mangas Destacados -->
+    <section class="featured-mangas">
+        <h2>Mangas destacados</h2>
+        <div class="manga-grid" id="featured-mangas-container">
+            <!-- Renderizado dinámico desde JS -->
+        </div>
+    </section>
+    </main>
+
+    <!-- Pie de Página (Footer) -->
+    <footer class="footer-main">
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>The One Page</h3>
+                <p>&copy; 2026 Todos los derechos reservados.</p>
+            </div>
+
+            <div class="newsletter-box">
+                <h4>¡Mantente en contacto! ÚNete a nuestro buzón de noticias.</h4>
+                <form id="newsletter-form">
+                    <input type="email" placeholder="Ingresa tu correo" required>
+                    <button type="submit" class="btn-secundary"Suscribirse></button>
+                </form>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts JS Modulares -->
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    
+</body>
+</html>
