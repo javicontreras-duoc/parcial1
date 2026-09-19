@@ -179,7 +179,7 @@ function validarCorreo(correo) {
     } 
 
 // Restricción exclusiva al dominio @gmail.com 
-    const regexGmail = /^[a-zA-Z0-9.\_%+-]+@gmail\\.com\\$/; 
+    const regexGmail = /^[a-zA-Z0-9._%+-]+@gmail\.com$/; 
     if (!regexGmail.test(correoTrim)) { 
         return { 
             valido: false, 

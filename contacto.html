@@ -123,7 +123,7 @@
                 mostrarError("nombre", res.valido ? "" : res.mensaje);
             });
             inputCorreo.addEventListener('input', () => {
-                const res = validarCorreoGmail(inputCorreo.value);
+                const res = validarCorreo(inputCorreo.value);
                 mostrarError("correo", res.valido ? "" : res.mensaje);
             });
             inputComentario.addEventListener('input', () => {
@@ -136,7 +136,7 @@
                 e.preventDefault();
 
                 const resNombre = validarNombreUsuario(inputNombre.value);
-                const resCorreo = validarCorreoGmail(inputCorreo.value);
+                const resCorreo = validarCorreo(inputCorreo.value);
                 const resComentario = validarComentarioContacto(inputComentario.value);
 
                 mostrarError("nombre", resNombre.valido ? "" : resNombre.mensaje);
