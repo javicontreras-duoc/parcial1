@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - The One Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- encabezado y navegación principal -->
+    <header class="header-main">
+        <div class="logo-container">
+            <a href="index.html" class="brand-logo">📖 The One Page</a>
+        </div>
+
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li> 
+                <li><a href="productos.html">Productos</a></li> 
+                <li><a href="nosotros.html">Nosotros</a></li> 
+                <li><a href="blogs.html">Blogs</a></li> 
+                <li><a href="contacto.html" class="active">Contacto</a></li>
+            </ul>
+        </nav>
+
+        <div class="user-cart-actions">
+            <a href="login.html" class="btn-link">Iniciar sesión</a>
+            <a href="registro.html" class="btn-link">Registrarse</a>
+            <a href="carrito.html" class="cart-btn">🛒 Cart (<span>0</span>)</a>
+        </div>
+    </header>
+
+    <!-- contenido principal -->
+    <main class="main-content">
+        <section class="contact-section">
+            <div class="contact-card">
+                <h1>FORMULARIO DE CONTACTO</h1>
+                <p class="contact-subtitle">¿Tienes dudas sobre un manga o tu pedido? Envíanos un mensaje.</p>
+
+                <form id="contacto-form" novalidate>
+                    <!-- Campo Nombre Completo -->
+                     <div class="form-group">
+                        <label for="nombre">Nombre Completo (*):</label>
+                        <input 
+                            type="text" 
+                            id="nombre" 
+                            name="nombre" 
+                            placeholder="Ingresa tu nombre y apellido"
+                            maxlength="100"
+                            required
+                        >
+                        <span class="error-msg" id="error-nombre"></span>
+                     </div>
+
+                     <!-- Campo Email -->
+                     <div class="form-group">
+                        <label for="correo">Correo Eléctronico (*):</label>
+                        <input 
+                            type="email" 
+                            id="correo" 
+                            name="correo" 
+                            placeholder="Ingresa tu correo electrónico (@gmail.com)"
+                            maxlength="100"
+                            required
+                        >
+                        <span class="error-msg" id="error-correo"></span>
+                     </div>
+
+                     <!-- Campo Comentario / Mensaje -->
+                     <div class="form-group">
+                        <label for="comentario">Comentario / Mensaje (*):</label>
+                        <textarea 
+                            id="comentario" 
+                            name="comentario" 
+                            rows="5"
+                            placeholder="Escribe tu mensaje aquí (max. 500 caracteres)"
+                            maxlength="500"
+                            required
+                        ></textarea>
+                        <span class="error-msg" id="error-comentario"></span>
+                        <small class="char-counter"><span id="comentario-count">0</span>/500 caracteres</small>
+                     </div>
+
+                    <!-- Botón de envío -->
+                     <button type="submit" class="btn-primary btn-block">Enviar Mensaje</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- pie de página -->
+    <footer class="footer-main">
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>The One Page</h3>
+                <p>&copy; 2026 Todos los derechos reservados.</p>
+            </div>
+
+            <div class="newsletter-box">
+                <h4>¡Mantente en contacto! Únete a nuestro buzón de noticias.</h4>
+                <form id="newsletter-form">
+                    <input type="email" placeholder="Ingresa tu correo" required>
+                    <button type="submit" class="btn-secundary">Suscribirse</button>
+                </form>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="js/cart.js"></script>
+    <script src="js/validations.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('contacto-form');
+            const inputNombre = document.getElementById('nombre');
+            const inputCorreo = document.getElementById('correo');
+            const inputComentario = document.getElementById('comentario');
+            const comentarioCount = document.getElementById('comentario-count');
+
+            inputNombre.addEventListener('input', () => {
+                const res = validarNombreUsuario(inputNombre.value);
+                mostrarError("nombre", res.valido ? "" : res.mensaje);
+            });
+            inputCorreo.addEventListener('input', () => {
+                const res = validarCorreoGmail(inputCorreo.value);
+                mostrarError("correo", res.valido ? "" : res.mensaje);
+            });
+            inputComentario.addEventListener('input', () => {
+                comentarioCount.textContent = inputComentario.value.length;
+                const res = validarComentarioContacto(inputComentario.value);
+                mostrarError("comentario", res.valido ? "" : res.mensaje);
+            });
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const resNombre = validarNombreUsuario(inputNombre.value);
+                const resCorreo = validarCorreoGmail(inputCorreo.value);
+                const resComentario = validarComentarioContacto(inputComentario.value);
+
+                mostrarError("nombre", resNombre.valido ? "" : resNombre.mensaje);
+                mostrarError("correo", resCorreo.valido ? "" : resCorreo.mensaje);
+                mostrarError("comentario", resComentario.valido ? "" : resComentario.mensaje);
+
+                if (resNombre.valido && resCorreo.valido && resComentario.valido) {
+                    alert("¡Mensaje enviado con éxito!");
+                    form.reset();
+                    comentarioCount.textContent = "0";
+                    limpiarError("nombre");
+                    limpiarError("correo");
+                    limpiarError("comentario");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
