@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario - The One Page</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <!-- Encabezado y Navegación Principal -->
+    <header class="header-main">
+        <div class="logo-container">
+            <a href="index.html" class="brand-logo">📖 The One Page</a>
+        </div>
+
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="blogs.html">Blogs</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+
+        <div class="user-cart-actions">
+            <a href="login.html" class="btn-link">Iniciar sesión</a>
+            <a href="registro.html" class="btn-link active">Registrarse</a>
+            <a href="carrito.html" class="cart-btn">🛒 Cart (<span id="cart-count">0</span>)</a>
+        </div>
+    </header>
+    
+    <!-- Contenido Principal -->
+    <main class="main-content">
+        <section class="register-section">
+            <div class="register-card">
+                <h1>Registro de Usuario</h1>
+                <p class="register-subtitle">Crea tu cuenta para comprar tus mangas favoritos en The One Page.</p>
+                
+                <form id="registro-form" novalidate>
+                    <!-- Campo RUN -->
+                    <div class="form-group">
+                        <label for="run">RUN (*):</label>
+                        <input 
+                            type="text" 
+                            id="run" 
+                            name="run" 
+                            placeholder="Ej. 19011022K (sin puntos ni guión)"
+                            maxlength="9"
+                            required
+                        >
+                        <span class="error-msg" id="error-run"></span>
+                    </div>
+
+                    <!-- Campo Nombre -->
+                    <div class="form-group">
+                        <label for="nombre">Nombre (*):</label>
+                        <input 
+                            type="text" 
+                            id="nombre" 
+                            name="nombre" 
+                            placeholder="Ej. Juan"
+                            maxlength="100"
+                            required
+                        >
+                        <span class="error-msg" id="error-nombre"></span>
+                    </div>
+
+                    <!-- Campo Apellido -->
+                    <div class="form-group">
+                        <label for="apellido">Apellido (*):</label>
+                        <input 
+                            type="text" 
+                            id="apellido" 
+                            name="apellido" 
+                            placeholder="Ej. Pérez"
+                            maxlength="100"
+                            required
+                        >
+                        <span class="error-msg" id="error-apellido"></span>
+                    </div>
+
+                    <!-- Campo Email -->
+                    <div class="form-group">
+                        <label for="correo">Correo Electrónico (*):</label>
+                        <input 
+                            type="email" 
+                            id="correo" 
+                            name="correo" 
+                            placeholder="Ingresa tu correo electrónico"
+                            maxlength="100"
+                            required
+                        >
+                        <span class="error-msg" id="error-correo"></span>
+                    </div>
+
+                    <!-- Campo Contraseña -->
+                    <div class="form-group">
+                        <label for="contrasena">Contraseña (*):</label>
+                        <input 
+                            type="password" 
+                            id="contrasena" 
+                            name="contrasena" 
+                            placeholder="Entre 8 y 20 caracteres"
+                            minlength="8"
+                            maxlength="20"
+                            required
+                        >
+                        <span class="error-msg" id="error-contrasena"></span>
+                    </div>
+
+                    <!-- Campo Confirmar Contraseña -->
+                    <div class="form-group">
+                        <label for="confirmarContrasena">Confirmar Contraseña (*):</label>
+                        <input 
+                            type="password" 
+                            id="confirmarContrasena" 
+                            name="confirmarContrasena" 
+                            placeholder="Repite tu contraseña"
+                            minlength="8"
+                            maxlength="20"
+                            required
+                        >
+                        <span class="error-msg" id="error-confirmarContrasena"></span>
+                    </div>
+
+                    <!-- Campo Fecha de nacimiento (opcional) -->
+                    <div class="form-group">
+                        <label for="fechaNacimiento">Fecha de Nacimiento (opcional):</label>
+                        <input 
+                            type="date" 
+                            id="fechaNacimiento" 
+                            name="fechaNacimiento"
+                        >
+                    </div>
+
+                    <!-- Campo Teléfono (opcional) -->
+                    <div class="form-group">
+                        <label for="telefono">Teléfono (opcional):</label>
+                        <input 
+                            type="tel" 
+                            id="telefono" 
+                            name="telefono"
+                            placeholder="+56912345678"
+                        >
+                    </div>
+
+                    <!-- Selector de región -->
+                    <div class="form-group">
+                        <label for="region">Región (*):</label>
+                        <select id="region" name="region" required>
+                            <option value="">Selecciona tu región</option>
+                        </select>
+                        <span class="error-msg" id="error-region"></span>
+                    </div>
+
+                    <!-- Selector de comuna -->
+                    <div class="form-group">
+                        <label for="comuna">Comuna (*):</label>
+                        <select id="comuna" name="comuna" required>
+                            <option value="">Selecciona tu comuna</option>
+                        </select>
+                        <span class="error-msg" id="error-comuna"></span>
+                    </div>
+                    
+                    <!-- Campo Dirección -->
+                    <div class="form-group">
+                        <label for="direccion">Dirección (*):</label>
+                        <input 
+                            type="text" 
+                            id="direccion" 
+                            name="direccion" 
+                            placeholder="Calle, número, departamento..."
+                            maxlength="300"
+                            required
+                        >
+                        <span class="error-msg" id="error-direccion"></span>
+                    </div>
+
+                    <!-- Botón de Registro -->
+                    <button type="submit" class="btn-primary btn-block">Registrarse</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de Página (Footer) -->
+    <footer class="footer-main">
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>The One Page</h3>
+                <p>&copy; 2026 Todos los derechos reservados.</p>
+            </div>
+
+            <div class="newsletter-box">
+                <h4>¡Mantente en contacto! Únete a nuestro buzón de noticias.</h4>
+                <form id="newsletter-form">
+                    <input type="email" placeholder="Ingresa tu correo" required>
+                    <button type="submit" class="btn-secundary">Suscribirse</button>
+                </form>
+            </div>
+        </div>
+    </footer>
+
+     <!-- Scripts JS Modulares -->
+    <script src="js/validations.js"></script>
+    <script src="js/cart.js"></script>
+
+    <script>
+        // Cargar regiones y comunas al cargar la página
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById('registro-form');
+            const inputRun = document.getElementById('run');
+            const inputNombre = document.getElementById('nombre');
+            const inputApellido = document.getElementById('apellido');       
+            const inputCorreo = document.getElementById('correo');
+            const inputContrasena = document.getElementById('contrasena');
+            const inputConfirmarContrasena = document.getElementById('confirmarContrasena');
+            const selectRegion = document.getElementById('region');
+            const selectComuna = document.getElementById('comuna');
+            const inputDireccion = document.getElementById('direccion');
+
+            cargarRegiones("region");
+
+            selectRegion.addEventListener("change", () => {
+                actualizarComunas("region", "comuna");
+                if (selectRegion.value) {
+                    limpiarError("region");
+                }
+            });
+
+            selectComuna.addEventListener("change", () => {
+                if (selectComuna.value) {
+                    limpiarError("comuna");
+                }
+            });
+
+            inputRun.addEventListener('input', () => {
+                const res = validarRun(inputRun.value);
+                mostrarError("run", res.valido ? "" : res.mensaje);
+            });
+
+            inputNombre.addEventListener('input', () => {
+                const res = validarNombreUsuario(inputNombre.value);
+                mostrarError("nombre", res.valido ? "" : res.mensaje);
+            });
+
+            inputApellido.addEventListener('input', () => {
+                const res = validarApellidoUsuario(inputApellido.value);
+                mostrarError("apellido", res.valido ? "" : res.mensaje);
+            });
+
+            inputCorreo.addEventListener('input', () => {
+                const res = validarCorreo(inputCorreo.value);
+                mostrarError("correo", res.valido ? "" : res.mensaje);
+            });
+
+            inputContrasena.addEventListener('input', () => {
+                const res = validarContrasena(inputContrasena.value);
+                mostrarError("contrasena", res.valido ? "" : res.mensaje);
+
+                if(inputConfirmarContrasena.value) {
+                    if(inputContrasena.value !== inputConfirmarContrasena.value) {
+                        mostrarError("confirmarContrasena", "Las contraseñas no coinciden.");
+                    } else {
+                        limpiarError("confirmarContrasena");
+                    }
+                }
+            });
+
+            inputConfirmarContrasena.addEventListener('input', () => {
+                if(inputContrasena.value !== inputConfirmarContrasena.value) {
+                    mostrarError("confirmarContrasena", "Las contraseñas no coinciden.");
+                } else {
+                    limpiarError("confirmarContrasena");
+                }
+            });
+
+            inputDireccion.addEventListener('input', () => {
+                const res = validarDireccion(inputDireccion.value);
+                mostrarError("direccion", res.valido ? "" : res.mensaje);
+            });
+
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const resRun = validarRun(inputRun.value);
+                const resNombre = validarNombreUsuario(inputNombre.value);
+                const resApellido = validarApellidoUsuario(inputApellido.value);
+                const resCorreo = validarCorreo(inputCorreo.value);
+                const resContrasena = validarContrasena(inputContrasena.value);
+                const resDireccion = validarDireccion(inputDireccion.value);
+
+                const regionValida = selectRegion.value !== "";
+                const comunaValida = selectComuna.value !== "";
+                const contrasenaCoincide = inputContrasena.value === inputConfirmarContrasena.value;
+
+                mostrarError("run", resRun.valido ? "" : resRun.mensaje);
+                mostrarError("nombre", resNombre.valido ? "" : resNombre.mensaje);
+                mostrarError("apellido", resApellido.valido ? "" : resApellido.mensaje);
+                mostrarError("correo", resCorreo.valido ? "" : resCorreo.mensaje);
+                mostrarError("contrasena", resContrasena.valido ? "" : resContrasena.mensaje);
+                mostrarError("confirmarContrasena", contrasenaCoincide ? "" : "Las contraseñas no coinciden.");
+                mostrarError("region", regionValida ? "" : "Debes seleccionar una región.");
+                mostrarError("comuna", comunaValida ? "" : "Debes seleccionar una comuna.");
+                mostrarError("direccion", resDireccion.valido ? "" : resDireccion.mensaje);
+
+                if (resRun.valido && 
+                    resNombre.valido && 
+                    resApellido.valido && 
+                    resCorreo.valido && 
+                    resContrasena.valido && 
+                    contrasenaCoincide && 
+                    regionValida && 
+                    comunaValida && 
+                    resDireccion.valido) {
+                        alert("¡Registro exitoso!");
+                        form.reset();
+                        actualizarComunas("region", "comuna");
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>

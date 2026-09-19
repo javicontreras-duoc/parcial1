@@ -227,22 +227,22 @@ function validarNombreUsuario(nombre) {
     }; 
 } 
 
-function validarApellidosUsuario(apellidos) { 
+function validarApellidoUsuario(apellidos) { 
     if (!apellidos || !apellidos.trim()) { 
         return { 
             valido: false, 
-            mensaje: "Los apellidos son obligatorios." 
+            mensaje: "El apellido es obligatorio." 
         }; 
     } 
     if (apellidos.trim().length > 100) { 
         return { 
             valido: false, 
-            mensaje: "Los apellidos no pueden superar los 100 caracteres." 
+            mensaje: "El apellido no pueden superar los 100 caracteres." 
         }; 
     } 
     return { 
         valido: true, 
-        mensaje: "Apellidos válidos." 
+        mensaje: "Apellido válido." 
     }; 
 } 
 
