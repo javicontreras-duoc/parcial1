@@ -124,7 +124,7 @@ function validarRun(runInput) {
     const cuerpo = runLimpio.slice(0, -1);
     const dv = runLimpio.slice(-1);
 
-    if (!/^\\d+\\$/.test(cuerpo)) { 
+    if (!/^\d+$/.test(cuerpo)) { 
         return { 
             valido: false, 
             mensaje: "El cuerpo del RUN debe contener solo dígitos." 
@@ -137,7 +137,7 @@ function validarRun(runInput) {
 
     for (let i = cuerpo.length - 1; i >= 0; i--) {
         suma += parseInt(cuerpo.charAt(i), 10) * multiplo;
-        multiplo = multiplicador === 7 ? 2 : multiplicador + 1;
+        multiplo = multiplo === 7 ? 2 : multiplo + 1;
     }
 
     const resto = 11 - (suma % 11);
