@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Mangas - The One Page</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Encabezado y Navegación Principal -->
+    <header class="header-main">
+        <div class="logo-container">
+            <a href="index.html" class="brand-logo">📖 The One Page</a>
+        </div>
+
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="productos.html" class="active">Productos</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="blogs.html">Blogs</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+
+        <div class="user-cart-actions">
+            <a href="login.html" class="btn-link">Iniciar sesión</a>
+            <a href="registro.html" class="btn-link">Registrarse</a>
+            <a href="carrito.html" class="cart-btn">🛒 Cart (<span>0</span>)</a>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+
+        <!-- Encabezado del Catálogo -->
+        <section class="catalog-header">
+            <h1>Catálogo de Mangas</h1>
+            <p>Explora nuestra colección completa de volúmenes, ediciones deluxe y lanzamientos recientes.</p>
+
+            <!-- Filtros Dinámicos por Categoría -->
+             <div>
+                <button class="filter-btn active" onclick="filtrarProductos('Todos', event)">Todos</button>
+                <button class="filter-btn" onclick="filtrarProductos('Shonen', event)">Shonen</button>
+                <button class="filter-btn" onclick="filtrarProductos('Seinen', event)">Seinen</button>
+                <button class="filter-btn" onclick="filtrarProductos('Shojo', event)">Shojo</button>
+             </div>
+        </section>
+
+        <!-- Grilla de Productos Renderizada Dinámicamente -->
+        <section class="products-catalog-section">
+            <div class="product-grid" id="products-catalog-container">
+                <!-- Renderizado dinámico desde JS (products.js) -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de Página (Footer) -->
+    <footer class="footer-main">
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>The One Page</h3>
+                <p>&copy; 2026 Todos los derechos reservados.</p>
+            </div>
+
+            <div class="newsletter-box">
+                <h4>¡Mantente en contacto! Únete a nuestro buzón de noticias.</h4>
+                <form id="newsletter-form">
+                    <input type="email" placeholder="Ingresa tu correo" required>
+                    <button type="submit" class="btn-secundary">Suscribirse</button>
+                </form>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts JS Modulares -->
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            renderizarCatalogo(productosIniciales);
+        });
+
+        function renderizarCatalogo(lista){
+            const container = document.getElementById('products-catalog-container');
+            if (!container) return;
+
+            if (lista.length === 0) {
+                container.innerHTML = '<p>No se encontraron mangas en esta categoría.</p>';
+                return;
+            }
+
+            container.innerHTML = lista.map(prod => `
+                <article class="product-card">
+                    <a>
+                        <img src="${prod.imagen}" alt="${prod.nombre}">
+                    </a>
+                    <span>${prod.categoria}</span>
+                    <h3><a href="detalle-producto.html?id=${prod.id}">${prod.nombre}</a></h3>
+                    <p>$${prod.precio.toLocaleString('es-CL')}</p>
+                    <button onclick="addToCart(${prod.id})" class="btn-secondary">Agregar al carrito</button>
+                </article>
+            `).join('');
+        }
+
+        function filtrarProductos(categoria, evt) {
+            const botones = document.querySelectorAll('.filter-btn');
+            botones.forEach(btn => btn.classList.remove('active'));
+            if (evt && evt.target) evt.target.classList.add('active');
+
+            if (categoria === 'Todos') {
+                renderizarCatalogo(productosIniciales);
+            } else {
+                const filtrados = productosIniciales.filter(p => p.categoria.toLowerCase() === categoria.toLowerCase());
+                renderizarCatalogo(filtrados);
+            }
+        }
+    </script>
+</body>
+</html>
