@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Encabezado y Navegación Principal -->
+    <header class="header-main">
+        <div class="logo-container">
+            <a href="index.html" class="brand-logo">📖 The One Page</a>
+        </div>
+
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="productos.html" class="active">Productos</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="blogs.html">Blogs</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+
+        <div class="user-cart-actions">
+            <a href="login.html" class="btn-link">Iniciar sesión</a>
+            <a href="registro.html" class="btn-link">Registrarse</a>
+            <a href="carrito.html" class="cart-btn">🛒 Cart (<span id="cart-count">0</span>)</a>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+        
+        <!-- Ruta de Navegación (Breadcrumbs) -->
+        <nav class="breadcrumbs" aria-label="breadcrumb">
+            <p id="breadcrumb-path">
+                <a href="index.html">Home</a> &gt;
+                <a href="productos.html">Productos</a> &gt;
+                <span id="breadcrumb-category">Categoría</span> &gt;
+                <strong id="breadcrumb-title">Cargando...</strong>
+            </p>
+        </nav>
+
+        <!-- Sección de Detalle del Producto -->
+        <section class="product-detail-container" id="product-detail-content">
+            <!-- Se llena dinámicamente mediante JavaScript -->
+        </section>
+    
+        <!-- Sección de Productos Relacionados -->
+        <section class="related-products-section">
+            <h2>Productos Relacionados</h2>
+            <div class="product-grid" id="related-products-container">
+                <!-- Renderizado dinámico de tomos relacionados -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de Página (Footer) -->
+    <footer class="footer-main">
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>The One Page</h3>
+                <p>&copy; 2026 Todos los derechos reservados.</p>
+            </div>
+
+            <div class="newsletter-box">
+                <h4>¡Mantente en contacto! Únete a nuestro buzón de noticias.</h4>
+                <form id="newsletter-form">
+                    <input type="email" placeholder="Ingresa tu correo" required>
+                    <button type="submit" class="btn-secundary">Suscribirse</button>
+                </form>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts JS Modulares -->
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = parseInt(urlParams.get("id"), 10);
+
+            const producto = productosIniciales.find(p => p.id === productId) || productosIniciales;
+
+            if (producto){
+                cargarDetalleProducto(producto);
+                cargarProductosRelacionados(producto);
+            }
+        });
+
+        function cargarDetalleProducto(prod){
+            document.getElementById("breadcrumb-category").textContent = prod.categoria;
+            document.getElementById("breadcrumb-title").textContent = prod.nombre;
+
+            const container = document.getElementById("product-detail-content");
+
+            container.innerHTML = `
+                <div class="detail-card">
+                    <div class="detail-image-box">
+                        <img src="${prod.imagen}" alt="${prod.nombre}">
+                    </div>
+
+                    <div class="detail-info-box">
+                        <span class="category-badge">${prod.categoria}</span>
+                        <small class="product-code">Código: ${prod.codigo || 'MNG-00' + prod.id}</small>
+                        <h1>${prod.nombre}</h1>
+                        <p class="detail-price">$${prod.precio.toLocaleString('es-CL')}</p>
+
+                        <div class="stock-status">
+                            <p><strong>Stock disponible:</strong>${prod.stock} unidades</p>
+                            ${prod.stock <= (prod.stockCritico || 3) ? '<span>⚠️ ¡Últimas unidades disponibles!</span>' : ''}
+                        </div>
+
+                        <p class="description">
+                            ${prod.descripcion || 'Disfruta de este increíble tomo de manga en su edición original. Ideal para coleccionistas y fanáticos de la serie.'}
+                        </p>
+                        
+                        <div class="purchase-actions">
+                            <div class="quantity-selector">
+                                <label for="product-qty"><strong>Cantidad:</strong></label>
+                                <input type="number" id="product-qty" min="1" max="${prod.stock}" value="1">
+                            </div>
+
+                            <button onclick="agregarAlCarritoConCantidad(${prod.id})" class="btn-primary">Agregar al carrito</button>
+                        </div>
+                    </div>
+                </div>
+            `;   
+        }
+
+        function agregarAlCarritoConCantidad(productId){
+            const qtyInput = document.getElementById("product-qty");
+            const cantidad = parseInt(qtyInput ? qtyInput.value : 1, 10);
+            
+            if(isNaN(cantidad) || cantidad < 1){
+                alert("Por favor seleccione una cantidad válida.");
+                return;
+            }
+
+            let cart = getCart();
+            const existingIndex = cart.findIndex(item => item.id === productId);
+
+            if (existingIndex > -1){
+                cart[existingIndex].cantidad += cantidad;
+            } else {
+                const product = productosIniciales.find(p => p.id === productId);
+                if (product){
+                    cart.push({...product, cantidad: cantidad });
+                }
+            }
+
+            saveCart(cart);
+            alert(`Se han añadido ${cantidad} unidad(es) de este manga al carrito.`)
+        }
+
+        function cargarProductosRelacionados(productoActual){
+            const container = document.getElementById("related-products-container");
+            if (!container) return;
+
+            const relacionados = productosIniciales.filter(p => p.id !== productoActual.id && p.categoria === productoActual.categoria);
+            const listaAMostrar = relacionados.length > 0 ? relacionados : productosIniciales.filter(p => p.id !== productoActual.id);
+
+            container.innerHTML= listaAMostrar.slice(0,3).map(prod => `
+                <article class="product-card">
+                    <a href="detalle-producto.html?id=${prod.id}">
+                        <img src="${prod.imagen}" alt="${prod.nombre}">
+                    </a>
+                    <span class="category-badge">${prod.categoria}</span>
+                    <h3><a href="detalle-producto.html?id=${prod.id}">${prod.nombre}</a></h3>
+                    <p class="price">$${prod.precio.toLocaleString('es-CL')}</p>
+                    <button onclick="addToCart(${prod.id})" class="btn-secondary">Agregar al carrito</button>
+                </article>
+            `).join("");
+        }
+    </script>
+</body>
+</html>
