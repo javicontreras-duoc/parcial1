@@ -1,12 +1,12 @@
-// Obtener carrito inicializar uno vacío
+// Obtener carrito o inicializar uno vacío
 function getCart() {
     return JSON.parse(localStorage.getItem("shopping_cart")) || [];
 }
 
 // Guardar carrito en LocalStorage
-function saveCart() {
+function saveCart(cart) {
     localStorage.setItem("shopping_cart", JSON.stringify(cart));
-    updateCartCounter;
+    updateCartCounter();
 }
 
 // Añadir ítem al carrito
