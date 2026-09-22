@@ -16,5 +16,24 @@ function addToCart(productId) {
 
     if (existingIndex > -1) {
         cart[existingIndex].cantidad += 1;
+    } else {
+        const product = productosIniciales.find(p => p.id === productId);
+        if (product){
+            cart.push({...product, cantidad: 1});
+        }
+    }
+
+    saveCart(cart)
+    alert("Producto añadido al carrito correctamente.");
+}
+
+function updateCartCounter(){
+    const cart = getCart();
+    const totalCount = cart.reduce((sum, item) => sum + item.cantidad, 0);
+    const cartBadge = document.getElementById("cart-count");
+    if(cartBadge){
+        cartBadge.textContent = totalCount;
     }
 }
+
+document.addEventListener("DOMContentLoaded", updateCartCounter);
