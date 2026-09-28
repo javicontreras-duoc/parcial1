@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs y Curiosidades - The One Page</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- encabezado y navegación principal -->
+    <header class="header-main">
+        <div class="logo-container">
+            <a href="index.html" class="brand-logo">📖 The One Page</a>
+        </div>
+
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li> 
+                <li><a href="productos.html">Productos</a></li> 
+                <li><a href="nosotros.html" class="active">Nosotros</a></li> 
+                <li><a href="blogs.html">Blogs</a></li> 
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+
+        <div class="user-cart-actions">
+            <a href="login.html" class="btn-link">Iniciar sesión</a>
+            <a href="registro.html" class="btn-link">Registrarse</a>
+            <a href="carrito.html" class="cart-btn">🛒 Cart (<span id="cart-count">0</span>)</a>
+        </div>
+    </header>
+    
+    <!-- contenido principal -->
+    <main class="main-content">
+        <section class="blog-header">
+            <h1>BLOGS Y CURIOSIDADES</h1>
+            <p>Entérate de las últimas noticias, datos curiosos e historias del mundo del cómic japonés.</p>
+        </section>
+
+        <!-- grilla de artículos -->
+        <section class="blogs-grid-section">
+            <div class="blogs-grid">
+
+                <!-- artículo 1 -->
+                <article class="blog-card">
+                    <img src="https://via.placeholder.com/400x200?text=Osamu+Tezuka" alt="El Dios del Manga">
+                    <div class="blog-card-body">
+                        <span class="blog-date"> 12 de septiembre, 2026</span>
+                        <h2>El origen del manga moderno: Osuma Tezuka</h2>
+                        <p>
+                            Descubre cómo el creador de Astro Boy revolucionó la industria del cómic japonés 
+                            e introdujo los característicos ojos grandes en los personajes.
+                        </p>
+                        <a href="detalle-blog.html?id=1" class="btn-link">Leer más &rarr;</a>
+                    </div>
+                </article>
+
+                <!-- artículo 2 -->
+                <article class="blog-card">
+                    <img src="https://via.placeholder.com/400x200?text=Guia+de+Lectura" alt="Cómo leer manga">
+                    <div class="blog-card-body">
+                        <span class="blog-date"> 18 de septiembre, 2026</span>
+                        <h2>Guía para principiantes: ¿Cómo leer un manga correctamente?</h2>
+                        <p>
+                            ¿Es tu primer manga? Te enseñamos el orden correcto de lectura 
+                            de derecha a izquierda y cómo seguir el flujo de las viñetas sin perderte.
+                        </p>
+                        <a href="detalle-blog.html?id=2" class="btn-link">Leer más &rarr;</a>
+                    </div>
+                </article>
+
+                <!-- artículo 3 -->
+                <article class="blog-card">
+                    <img src="https://via.placeholder.com/400x200?text=Ediciones+Deluxe" alt="Ediciones Deluxe vs Standard">
+                    <div class="blog-card-body">
+                        <span class="blog-date"> 24 de septiembre, 2026</span>
+                        <h2>Ediciones Deluxe vs. Tankobon: ¿Cuál conviene comprar?</h2>
+                        <p>
+                            Analizamos las diferencias en papel, encuadernación en tapa dura, 
+                            páginas a color y durabilidad entre las distintas ediciones del mercado.
+                        </p>
+                        <a href="detalle-blog.html?id=3" class="btn-link">Leer más &rarr;</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- pie de página -->
+    <footer class="footer-main">
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>The One Page</h3>
+                <p>&copy; 2026 Todos los derechos reservados.</p>
+            </div>
+
+            <div class="newsletter-box">
+                <h4>¡Mantente en contacto! Únete a nuestro buzón de noticias.</h4>
+                <form id="newsletter-form">
+                    <input type="email" placeholder="Ingresa tu correo" required>
+                    <button type="submit" class="btn-secundary">Suscribirse</button>
+                </form>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/cart.js"></script>
+</body>
+</html>
