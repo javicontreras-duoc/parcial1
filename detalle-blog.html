@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Blog - The One Page</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- encabezado y navegación principal -->
+    <header class="header-main">
+        <div class="logo-container">
+            <a href="index.html" class="brand-logo">📖 The One Page</a>
+        </div>
+
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li> 
+                <li><a href="productos.html">Productos</a></li> 
+                <li><a href="nosotros.html" class="active">Nosotros</a></li> 
+                <li><a href="blogs.html">Blogs</a></li> 
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+
+        <div class="user-cart-actions">
+            <a href="login.html" class="btn-link">Iniciar sesión</a>
+            <a href="registro.html" class="btn-link">Registrarse</a>
+            <a href="carrito.html" class="cart-btn">🛒 Cart (<span id="cart-count">0</span>)</a>
+        </div>
+    </header>
+
+    <!-- contenido principal -->
+    <main class="main-content">
+
+        <!-- Ruta de Navegación (Breadcrumbs) -->
+        <nav class="breadcrumbs">
+            <p>
+                <a href="index.html">Home</a> &gt;
+                <a href="blogs.html">Blogs</a> &gt;
+                <strong id="blog-title-breadcrumb">Cargando...</strong>
+            </p>
+        </nav>
+
+        <article class="blog-detail-container" id="blog-content">
+            <!-- Se carga dinámicamente mediante JS -->
+        </article>
+
+        <div class="back-link-container">
+            <a href="blogs.html" class="btn-secondary">&larr; Volver a todos los blogs</a>
+        </div>
+    </main>
+    
+    <!-- pie de página -->
+    <footer class="footer-main">
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>The One Page</h3>
+                <p>&copy; 2026 Todos los derechos reservados.</p>
+            </div>
+
+            <div class="newsletter-box">
+                <h4>¡Mantente en contacto! Únete a nuestro buzón de noticias.</h4>
+                <form id="newsletter-form">
+                    <input type="email" placeholder="Ingresa tu correo" required>
+                    <button type="submit" class="btn-secondary">Suscribirse</button>
+                </form>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/cart.js"></script>
+    <script>
+        const blogsData = {
+            1: {
+                titulo: "El origen del manga moderno: Osamu Tezuka",
+                fecha: "12 de Septiembre, 2026",
+                autor: "Redacción The One Page",
+                imagen: "https://via.placeholder.com/800x400?text=Osamu+Tezuka",
+                contenido: `
+                <p>Osamu Tezuka (1928-1989) es conocido mundialmente como "El Dios del Manga" (Manga no Kamisama). Fue un dibujante y médico japonés cuya prolífica obra transformó el cómic en Japón tras la Segunda Guerra Mundial.</p>
+                <p>Inspirado fuertemente por las animaciones occidentales de Walt Disney, Tezuka adoptó la característica estética de personajes con ojos grandes y expresivos, ángulos de cámara cinematográficos y ritmos narrativos dinámicos que no se habían visto antes en el medio.</p>
+                <blockquote>"El manga es una herramienta para conectar a las personas y transmitir emociones universales más allá de las fronteras idioma o cultura."</blockquote>
+                <p>Obras icónicas como <em>Astro Boy (Tetsuwan Atom)</em>, <em>Kimba, el león blanco</em> y <em>Black Jack</em> sentaron las bases no solo del manga moderno, sino también de la industria del anime que disfrutamos hoy en día.</p>
+                `
+            },
+            2: {
+                titulo: "Guía para principiantes: ¿Cómo leer un manga correctamente?",
+                fecha: "18 de Septiembre, 2026",
+                autor: "Comunidad The One Page",
+                imagen: "https://via.placeholder.com/800x400?text=Guia+de+Lectura",
+                contenido: `
+                <p>Para quienes leen manga por primera vez, el formato tradicional japonés puede resultar desconcertante debido a que se lee en sentido inverso a los libros occidentales.</p>
+                <h3>Reglas básicas de lectura:</h3>
+                <ul>
+                    <li><strong>De derecha a izquierda:</strong> La portada del manga está donde normalmente estaría la contraportada de un libro occidental.</li>
+                    <li><strong>De arriba hacia abajo:</strong> Dentro de cada página, lee las viñetas comenzando por la esquina superior derecha hacia la izquierda, y luego baja a la siguiente fila.</li>
+                    <li><strong>Globos de texto:</strong> Aplica la misma regla: primero lee los diálogos ubicados a la derecha y luego los de la izquierda.</li>
+                </ul>
+                `
+            },
+            3: {
+                titulo: "Ediciones Deluxe vs. Tankobon: ¿Cuál conviene comprar?",
+                fecha: "24 de Septiembre, 2026",
+                autor: "Equipo Editorial",
+                imagen: "https://via.placeholder.com/800x400?text=Ediciones+Deluxe",
+                contenido: `
+                <p>A la hora de coleccionar manga, los lectores suelen enfrentarse al dilema de elegir entre la versión estándar tipo <em>Tankobon</em> (tapa blanda) o las cotizadas ediciones <em>Deluxe / Maximum / Kanzenban</em>.</p>
+                <p>Las ediciones Deluxe ofrecen papel de mayor gramaje, formato físico más grande, tapas duras con grabados e incluyen páginas a color originales de las revistas japonesas. Por su parte, los tomos Tankobon son más económicos, ligeros y fáciles de transportar.</p>
+                `
+            }
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const blogId = parseInt(urlParams.get("id"), 10) || 1;
+            const blog = blogsData[blogId] || blogsData[1];
+
+            document.getElementById("blog-title-breadcrumb").textContent = blog.titulo;
+
+            const container = document.getElementById("blog-content");
+            container.innerHTML = `
+                <header class="blog-post-header">
+                <h1>${blog.titulo}</h1>
+                <div class="blog-meta">
+                    <span>📅 ${blog.fecha}</span> | <span>✍️ ${blog.autor}</span>
+                </div>
+                </header>
+                <div class="blog-post-image">
+                <img src="${blog.imagen}" alt="${blog.titulo}">
+                </div>
+                <div class="blog-post-body">
+                ${blog.contenido}
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>
