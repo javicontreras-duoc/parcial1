@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - The One Page</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- encabezado y navegación principal -->
+    <header class="header-main">
+        <div class="logo-container">
+            <a href="index.html" class="brand-logo">📖 The One Page</a>
+        </div>
+
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li> 
+                <li><a href="productos.html">Productos</a></li> 
+                <li><a href="nosotros.html">Nosotros</a></li> 
+                <li><a href="blogs.html">Blogs</a></li> 
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+
+        <div class="user-cart-actions">
+            <a href="login.html" class="btn-link">Iniciar sesión</a>
+            <a href="registro.html" class="btn-link">Registrarse</a>
+            <a href="carrito.html" class="cart-btn">🛒 Cart (<span id="cart-count">0</span>)</a>
+        </div>
+    </header>
+
+    <!-- contenido principal -->
+    <main class="main-content">
+        <section class="cart-section">
+            <h1>CARRITO DE COMPRAS</h1>
+            <p class="cart-subtitle">Revisa los mangas seleccionados antes de finalizar tu pedido.</p>
+
+            <!-- tabla dinámica del carrito -->
+            <div id="cart-container" class="cart-table-wrapper">
+                <!-- renderizado desde js -->
+            </div>
+
+            <!-- resumen y acción de compra -->
+            <div id="cart-summary" class="cart-summary-card" style="display: none;">
+                <h3>Resumen de la compra</h3>
+                <div class="summary-line">
+                    <span>Subtotal:</span>
+                    <strong id="cart-subtotal">\$0</strong>
+                </div>
+                <div class="summary-line">
+                    <span>Envío:</span>
+                    <span>Calculado en el pago</span>
+                </div>
+                <hr>
+                <div class="summary-line total-line">
+                    <span>Total:</span>
+                    <strong id="cart-total">\$0</strong>
+                </div>
+
+                <div class="summary-actions">
+                    <button onclick="vaciarCarrito()" class="btn-secondary">Vaciar carrito</button>
+                    <button onclick="procesarPago()" class="btn-primary">Proceder al pago</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- pie de página -->
+    <footer class="footer-main">
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>The One Page</h3>
+                <p>&copy; 2026 Todos los derechos reservados.</p>
+            </div>
+
+            <div class="newsletter-box">
+                <h4>¡Mantente en contacto! Únete a nuestro buzón de noticias.</h4>
+                <form id="newsletter-form">
+                    <input type="email" placeholder="Ingresa tu correo" required>
+                    <button type="submit" class="btn-secundary">Suscribirse</button>
+                </form>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/cart.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            renderizarTablaCarrito();
+        });
+
+        // renderizar tabla con productos desde localStorage
+        function renderizarTablaCarrito() {
+            const container = document.getElementById("cart-container");
+            const summaryCard = document.getElementById("cart-summary");
+            const cart = getCart();
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                <div class="empty-cart-msg">
+                    <p>Tu carrito está vacío.</p>
+                    <a href="productos.html" class="btn-primary">Explorar catálogo</a>
+                </div>
+            `;
+            if (summaryCard) summaryCard.style.display = "none";
+            return;
+            }
+
+            let total = 0;
+
+            let html = `
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Portada</th>
+                            <th>Manga</th>
+                            <th>Precio Unitario</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                            <th>Acción</th>
+                        </tr>    
+                    </thead>
+                <tbody>
+            `;
+
+            cart.forEach(item => {
+                const subtotalItem = item.precio * item.cantidad;
+                total += subtotalItem;
+
+                html += `
+                    <tr>
+                        <td>
+                            <img src="${item.imagen}" alt="${item.nombre}">
+                        </td>
+                        <td><strong>${item.nombre}</strong></td>
+                        <td>$${item.precio.toLocaleString('es-CL')}</td>
+                        <td>
+                            <input
+                            type="number"
+                            min="1"
+                            max="${item.stock || 99}"
+                            value="${item.cantidad}"
+                            onchange="cambiarCantidad(${item.id}, this.value)"
+                            class="cart-qty-input"
+                            >    
+                        </td>
+                        <td><strong>$${subtotalItem.toLocaleString('es-CL')}</strong></td>
+                        <td>
+                            <button onclick="eliminarDelCarrito(${item.id})" class="btn-danger-sm">🗑️ Eliminar</button>  
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                    </tbody>
+                </table>
+            `;
+
+            container.innerHTML = html;
+
+            // actualizar montos
+            document.getElementById("cart-subtotal").textContent = `$${total.toLocaleString('es-CL')}`;
+            document.getElementById("cart-total").textContent = `$${total.toLocaleString('es-CL')}`;
+            if (summaryCard) summaryCard.style.display = "block";
+        }
+
+        //cambiar cantidad de un producto
+        function cambiarCantidad(productId, nuevaCantidad) {
+            const qty = parseInt(nuevaCantidad, 10);
+            if (isNaN(qty) || qty < 1) {
+                renderizarTablaCarrito();
+                return;
+            }
+
+            let cart = getCart();
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.cantidad = qty;
+                saveCart(cart);
+                renderizarTablaCarrito();
+            }
+        }
+
+        // eliminar producto
+        function eliminarDelCarrito(productId) {
+            let cart = getCart();
+            cart = cart.filter(item => item.id != productId);
+            saveCart(cart);
+            renderizarTablaCarrito();
+        }
+
+        // vaciar carrito
+        function vaciarCarrito() {
+            if(confirm("¿Estás seguro de vaciar el carrito?")) {
+                saveCart([]);
+                renderizarTablaCarrito();
+            }
+        }
+
+        // simulación proceso de pago
+        function procesarPago() {
+            alert("¡Gracias por tu compra!");
+            saveCart([]);
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>
