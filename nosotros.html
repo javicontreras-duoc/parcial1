@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros - The One Page</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- encabezado y navegación principal -->
+    <header class="header-main">
+        <div class="logo-container">
+            <a href="index.html" class="brand-logo">📖 The One Page</a>
+        </div>
+
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li> 
+                <li><a href="productos.html">Productos</a></li> 
+                <li><a href="nosotros.html" class="active">Nosotros</a></li> 
+                <li><a href="blogs.html">Blogs</a></li> 
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+
+        <div class="user-cart-actions">
+            <a href="login.html" class="btn-link">Iniciar sesión</a>
+            <a href="registro.html" class="btn-link">Registrarse</a>
+            <a href="carrito.html" class="cart-btn">🛒 Cart (<span id="cart-count">0</span>)</a>
+        </div>
+    </header>
+
+    <!-- contenido principal -->
+    <main class="main-content">
+        <section class="hero-banner">
+            <div class="hero-text">
+                <h1>SOBRE THE ONE PAGE</h1>
+                <p>Tu santuario de mangas, cómics y ediciones de colección en Chile.</p>
+            </div>
+        </section>
+
+        <!-- sección de historia y misión -->
+        <section class="about-section">
+            <article class="about-card">
+                <h2>Nuestra Historia</h2>
+                <p>
+                    <strong>The One Page</strong> nació en 2024 de la pasión de un grupo de lectores 
+                    y coleccionistas apasionados por la cultura japonesa. Nos dimos cuenta de lo difícil 
+                    que era conseguir tomos oficiales, ediciones deluxe y lanzamientos simultáneos con 
+                    traducciones de calidad. Por ello, creamos una plataforma pensada por y para fanáticos del manga.
+                </p>
+            </article>
+
+            <div class="values-grid">
+                <article class="value-card">
+                    <h3>⛩️ Pasión por el Manga</h3>
+                    <p>Curamos nuestro catálogo seleccionando los mejores títulos Shonen, Seinen, Shojo y obras independientes.</p></p>
+                </article>
+                <article class="value-card">
+                    <h3>📦 Calidad Garantizada</h3>
+                    <p>Todos nuestros tomos son 100% oficiales de editoriales reconocidas (IVREA, Panini, Norma Editorial, Distrito Manga).</p></p>
+                </article>
+                <article class="value-card">
+                    <h3>🚀 Envíos Rápidos</h3>
+                    <p>Cuidamos cada envío con embalaje reforzado para que tus tomos lleguen en estado impecable a todo Chile.</p></p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- pie de página -->
+    <footer class="footer-main">
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>The One Page</h3>
+                <p>&copy; 2026 Todos los derechos reservados.</p>
+            </div>
+
+            <div class="newsletter-box">
+                <h4>¡Mantente en contacto! Únete a nuestro buzón de noticias.</h4>
+                <form id="newsletter-form">
+                    <input type="email" placeholder="Ingresa tu correo" required>
+                    <button type="submit" class="btn-secundary">Suscribirse</button>
+                </form>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/cart.js"></script>
+</body>
+</html>
