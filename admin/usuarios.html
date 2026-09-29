@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mantenedor de Usuarios - The One Page</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="admin-body">
+    <div class="admin-layout">
+        <!-- Barra Lateral de Navegación del Administrador (Sidebar) -->
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <div class="sidebar-brand">
+                <h2>📖 The One Page</h2>
+                <small>Panel de control</small>
+            </div>
+            
+            <nav class="admin-nav">
+                <ul>
+                    <li><a href="dashboard.html">📊 Dashboard</a></li>
+                    <li><a href="productos.html">📚 Mantenedor Productos</a></li>
+                    <li id="nav-users-item"><a href="usuarios.html" class="active">👥 Mantenedor Usuarios</a></li>
+                    <li><a href="../index.html" target="_blank">🌐 Ir a la Tienda Pública</a></li>
+                    <li><a href="../login.html" class="logout-btn"></a>🚪 Cerrar Sesión</li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Contenido Principal -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1>Gestión de usuarios y roles</h1>
+                <button onclick="mostrarformularioNuevo()" class="btn-primary">+ Nuevo Usuario</button>
+            </header>
+
+            <!-- Formulario Crear / Editar Usuario -->
+            <section id="form-user-section" class="admin-section" style="display: none;">
+                <h2 id="form-title">Registrar nuevo usuario</h2>
+
+                <form id="user-form" novalidate>
+                    <input type="hidden" id="user-id">
+
+                    <div class="form-grid-2col">
+                        <!-- Campo RUN -->
+                        <div class="form-group">
+                            <label for="run">RUN (*):</label>
+                            <input 
+                                type="text" 
+                                id="run" 
+                                name="run" 
+                                placeholder="Ej. 19011022K (sin puntos ni guión)"
+                                maxlength="9"
+                                required
+                            >
+                            <span class="error-msg" id="error-run"></span>
+                        </div>
+
+                        <!-- Campo Nombre -->
+                        <div class="form-group">
+                            <label for="nombre">Nombre (*):</label>
+                            <input 
+                                type="text" 
+                                id="nombre" 
+                                name="nombre" 
+                                placeholder="Ej. Juan"
+                                maxlength="100"
+                                required
+                            >
+                            <span class="error-msg" id="error-nombre"></span>
+                        </div>
+
+                        <!-- Campo Apellido -->
+                        <div class="form-group">
+                            <label for="apellido">Apellido (*):</label>
+                            <input 
+                                type="text" 
+                                id="apellido" 
+                                name="apellido" 
+                                placeholder="Ej. Pérez"
+                                maxlength="100"
+                                required
+                            >
+                            <span class="error-msg" id="error-apellido"></span>
+                        </div>
+
+                        <!-- Campo Email -->
+                        <div class="form-group">
+                            <label for="correo">Correo Electrónico (*):</label>
+                            <input 
+                                type="email" 
+                                id="correo" 
+                                name="correo" 
+                                placeholder="Ingresa tu correo electrónico"
+                                maxlength="100"
+                                required
+                            >
+                            <span class="error-msg" id="error-correo"></span>
+                        </div>
+
+                        <!-- Campo Contraseña -->
+                        <div class="form-group">
+                            <label for="contrasena">Contraseña (*):</label>
+                            <input 
+                                type="password" 
+                                id="contrasena" 
+                                name="contrasena" 
+                                placeholder="Entre 4 y 10 caracteres"
+                                minlength="4"
+                                maxlength="10"
+                                required
+                            >
+                            <span class="error-msg" id="error-contrasena"></span>
+                        </div>
+
+                        <!-- Asignación de Rol -->
+                        <div class="form-group">
+                            <label for="contrasena">Rol del sistema (*):</label>
+                            <select id="rol" required>
+                                <option value="">-- Seleccionar Rol --</option>
+                                <option value="Cliente">Cliente (Tienda pública)</option>
+                                <option value="Vendedor">Vendedor (Catálogo y ventas)</option>
+                                <option value="Administrador">Administrador (Acceso total)</option>
+                            </select>
+                            <span class="error-msg" id="error-rol"></span>
+                        </div>
+
+                        <!-- Selector de región -->
+                        <div class="form-group">
+                            <label for="region">Región (*):</label>
+                            <select id="region" name="region" required>
+                                <option value="">Selecciona tu región</option>
+                            </select>
+                            <span class="error-msg" id="error-region"></span>
+                        </div>
+
+                        <!-- Selector de comuna -->
+                        <div class="form-group">
+                            <label for="comuna">Comuna (*):</label>
+                            <select id="comuna" name="comuna" required>
+                                <option value="">Selecciona tu comuna</option>
+                            </select>
+                            <span class="error-msg" id="error-comuna"></span>
+                        </div>
+                    </div>
+                        
+                    <!-- Campo Dirección -->
+                    <div class="form-group">
+                        <label for="direccion">Dirección (*):</label>
+                        <input 
+                            type="text" 
+                            id="direccion" 
+                            name="direccion" 
+                            placeholder="Calle, número, departamento..."
+                            maxlength="300"
+                            required
+                        >
+                        <span class="error-msg" id="error-direccion"></span>
+                    </div>
+
+                    <!-- Botones de Acción -->
+                    <div class="form-actions-bar">
+                        <button type="submit" class="btn-primary">Guardar usuario</button>
+                        <button type="button" onclick="ocultarFormulario()" class="btn-secondary">Cancelar</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Tabla de Usuarios Registrados -->
+            <section class="admin-section">
+                <div class="table-header-controls">
+                    <h2>Usuarios registrados en el sistema</h2>
+                    <div class="search-filter-box">
+                        <input
+                            type="text" 
+                            id="search-user" 
+                            oninput="filtrarUsuarios()"
+                            placeholder="Buscar por RUN, nombre o correo..."
+                        >
+                        <select id="filter-role" onchange="filtrarUsuarios()">
+                            <option value="Todos">Todos los roles</option>
+                            <option value="Administrador">Administrador</option>
+                            <option value="Vendedor">Vendedor</option>
+                            <option value="Cliente">Cliente</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>RUN</th>
+                                <th>Nombre completo</th>
+                                <th>Correo</th>
+                                <th>Rol</th>
+                                <th>Ubicación|</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body">
+                            <!-- Renderizado dinámico con JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts JS Modulares -->
+    <script src="../js/validations.js"></script>
+    <script>
+        //usuarios iniciales de prueba
+        const usuariosIniciales = [
+            {
+                id: 1,
+                run: "19011022K",
+                nombre: "Admin",
+                apellidos: "General",
+                correo: "admin@gmail.com",
+                contrasena: "admin123",
+                rol: "Administrador",
+                region: "Región Metropolitana de Santiago",
+                comuna: "Santiago",
+                direccion: "Av. Libertador Bernardo O'Higgins 1234",
+                activo: true
+            },
+            {
+                id: 2,
+                run: "182345678",
+                nombre: "Carlos",
+                apellidos: "Vendedor Silva",
+                correo: "vendedor@gmail.com",
+                contrasena: "vend1234",
+                rol: "Vendedor",
+                region: "Región de Valparaíso",
+                comuna: "Viña del Mar",
+                direccion: "Calle Valparaíso 450",
+                activo: true
+            },
+            {
+                id: 3,
+                run: "201234567",
+                nombre: "María",
+                apellidos: "López Rojas",
+                correo: "maria.lopez@gmail.com",
+                contrasena: "manga2026",
+                rol: "Cliente",
+                region: "Región del Biobío",
+                comuna: "Concepción",
+                direccion: "Aníbal Pinto 890",
+                activo: true
+            }
+        ];
+
+        function obtenerUsuarios() {
+            return JSON.parse(localStorage.getItem("admin-users")) || usuariosIniciales;
+        }
+
+        function guardarUsuarios(lista) {
+            localStorage.setItem("admin-users", JSON.stringify(lista));
+            renderizarTablaUsuarios();
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            cargarRegiones("region");
+            renderizarTablaUsuarios();
+            configurarEventosValidacion();
+
+            const selectRegion = document.getElementById("region");
+            selectRegion.addEventListener("change", () => {
+                actualizarComunas("region", "comuna");
+            });
+
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get("action") === "nuevo") {
+                mostrarformularioNuevo();
+            }
+        });
+
+        function renderizarTablaUsuarios(listaAFiltrar = null) {
+            const usuarios = listaAFiltrar || obtenerUsuarios();
+            const tbody = document.getElementById("users-table-body");
+
+            if(usuarios.length === 0) {
+                tbody.innerHTML = `
+                <tr>
+                    <td colspan="7" class="text-center">
+                        No hay usuarios registrados.
+                    </td>
+                </tr>
+            `;
+            return;
+            }
+
+            tbody.innerHTML = usuarios.map(u => `
+                <tr>
+                    <td><strong>${u.run}</strong></td>
+                    <td>${u.nombre} ${u.apellidos}</td>
+                    <td>${u.correo}</td>
+                    <td>
+                        <span class="role-badge ${u.rol.toLowerCase()}">${u.rol}</span>
+                    </td>
+                    <td><small>${u.comuna}, ${u.region}</small></td>
+                    <td>
+                        <span class="status-badge ${u.activo ? 'success' : 'danger'}">
+                        ${u.activo ? 'Activo' : 'Inactivo'}
+                        </span>
+                    </td>
+                    <td class="actions-cell">
+                        <button onclick="cargarUsuarioParaEditar(${u.id})" class="btn-action-sm">✏️ Editar</button>
+                        <button onclick="toggleEstadoUsuario(${u.id})" class="${u.activo ? 'btn-danger-sm' : 'btn-secondary-sm'}">
+                            ${u.activo ? 'Desactivar' : 'Activar'}
+                        </button>
+                    </td>
+                </tr>
+            `).join("");
+        }
+
+        // filtro de búsqueda
+        function filtrarUsuarios() {
+            const query = document.getElementById("search-user").value.toLowerCase();
+            const rol = document.getElementById("filter-role").value;
+            const usuarios = obtenerUsuarios();
+
+            const filtrados = usuarios.filter(u => {
+                const coincidenciaTexto = u.run.toLowerCase().includes(query) ||
+                                          u.nombre.toLowerCase().includes(query) ||
+                                          u.apellidos.toLowerCase().includes(query) ||
+                                          u.correo.toLowerCase().includes(query);
+                const coincidenciaRol = rol === "Todos" || u.rol === rol;
+                return coincidenciaRol && coincidenciaTexto;
+            });
+
+            renderizarTablaUsuarios(filtrados);
+        }
+
+        // funciones del formulario
+        function mostrarformularioNuevo() {
+            document.getElementById("form-title").textContent = "Registrar Nuevo Usuario";
+            document.getElementById("user-form").reset();
+            document.getElementById("user-id").value = "";
+            actualizarComunas("region", "comuna");
+            document.getElementById("form-user-section").style.display = "block";
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function ocultarFormulario() {
+            document.getElementById("form-user-section").style.display = "none";
+        }
+
+        function cargarUsuarioParaEditar(id) {
+            const usuarios = obtenerUsuarios();
+            const u = usuarios.find(item => item.id === id);
+            if (!u) return;
+
+            document.getElementById("form-title").textContent = `Editar Usuario: ${u.nombre} ${u.apellidos}`;
+            document.getElementById("user-id").value = u.id;
+            document.getElementById("run").value = u.run;
+            document.getElementById("nombre").value = u.nombre;
+            document.getElementById("apellidos").value = u.apellidos;
+            document.getElementById("correo").value = u.correo;
+            document.getElementById("contrasena").value = u.contrasena;
+            document.getElementById("rol").value = u.rol;
+            document.getElementById("region").value = u.region;
+            
+            actualizarComunas("region", "comuna");
+            document.getElementById("comuna").value = u.comuna;
+            document.getElementById("direccion").value = u.direccion;
+
+            document.getElementById("form-user-section").style.display = "block";
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function configurarEventosValidacion() {
+            const inputRun = document.getElementById("run");
+            const inputNombre = document.getElementById("nombre");
+            const inputApellidos = document.getElementById("apellidos");
+            const inputCorreo = document.getElementById("correo");
+            const inputPass = document.getElementById("contrasena");
+            const inputDireccion = document.getElementById("direccion");
+
+            inputRun.addEventListener("input", () => {
+                const res = validarRunChileno(inputRun.value);
+                mostrarError("run", res.valido ? "" : res.mensaje);
+            });
+
+            inputNombre.addEventListener("input", () => {
+                const res = validarNombreUsuario(inputNombre.value);
+                mostrarError("nombre", res.valido ? "" : res.mensaje);
+            });
+
+            inputApellidos.addEventListener("input", () => {
+                const res = validarApellidosUsuario(inputApellidos.value);
+                mostrarError("apellidos", res.valido ? "" : res.mensaje);
+            });
+
+            inputCorreo.addEventListener("input", () => {
+                const res = validarCorreoGmail(inputCorreo.value);
+                mostrarError("correo", res.valido ? "" : res.mensaje);
+            });
+
+            inputPass.addEventListener("input", () => {
+                const res = validarContrasena(inputPass.value);
+                mostrarError("contrasena", res.valido ? "" : res.mensaje);
+            });
+
+            inputDireccion.addEventListener("input", () => {
+                const res = validarDireccion(inputDireccion.value);
+                mostrarError("direccion", res.valido ? "" : res.mensaje);
+            });
+
+            //submit formulario
+            document.getElementById("user-form").addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const resRun = validarRunChileno(inputRun.value);
+                const resNom = validarNombreUsuario(inputNombre.value);
+                const resApe = validarApellidosUsuario(inputApellidos.value);
+                const resCor = validarCorreoGmail(inputCorreo.value);
+                const resPas = validarContrasena(inputPass.value);
+                const resDir = validarDireccion(inputDireccion.value);
+
+                const rolVal = document.getElementById("rol").value;
+                const regVal = document.getElementById("region").value;
+                const comVal = document.getElementById("comuna").value;
+
+                mostrarError("run", resRun.valido ? "" : resRun.mensaje);
+                mostrarError("nombre", resNom.valido ? "" : resNom.mensaje);
+                mostrarError("apellidos", resApe.valido ? "" : resApe.mensaje);
+                mostrarError("correo", resCor.valido ? "" : resCor.mensaje);
+                mostrarError("contrasena", resPas.valido ? "" : resPas.mensaje);
+                mostrarError("direccion", resDir.valido ? "" : resDir.mensaje);
+
+                mostrarError("rol", rolVal ? "" : "Debe seleccionar un rol.");
+                mostrarError("region", regVal ? "" : "Debe seleccionar una región.");
+                mostrarError("comuna", comVal ? "" : "Debe seleccionar una comuna.");
+
+                if (
+                    resRun.valido && resNom.valido && resApe.valido &&
+                    resCor.valido && resPas.valido && resDir.valido &&
+                    rolVal && regVal && comVal
+                ) {
+                    let usuarios = obtenerUsuarios();
+                    const userId = document.getElementById("user-id").value;
+
+                    const nuevoUsuario = {
+                        id: userId ? parseInt(userId, 10) : Date.now(),
+                        run: inputRun.value.trim().toUpperCase(),
+                        nombre: inputNombre.value.trim(),
+                        apellidos: inputApellidos.value.trim(),
+                        correo: inputCorreo.value.trim(),
+                        contrasena: inputPass.value,
+                        rol: rolVal,
+                        region: regVal,
+                        comuna: comVal,
+                        direccion: inputDireccion.value.trim(),
+                        activo: true
+                    };
+
+                    if (userId) {
+                        const idx = usuarios.findIndex(u => u.id === nuevoUsuario.id);
+                        if (idx !== -1) usuarios[idx] = nuevoUsuario;
+                    } else {
+                        usuarios.push(nuevoUsuario);
+                    }
+
+                    guardarUsuarios(usuarios);
+                    alert(userId ? "¡Usuario actualizado con éxito!" : "¡Nuevo usuario creado con éxito!");
+                    ocultarFormulario();
+                    }
+                });
+            }
+
+            function toggleEstadoUsuario(id){
+                let usuarios = obtenerUsuarios();
+                const user = usuarios.find(u => u.id === id);
+                if (user) {
+                    user.activo != user.activo;
+                    guardarUsuarios(usuarios);
+                }
+            }
+    </script>
+</body>
+</html>

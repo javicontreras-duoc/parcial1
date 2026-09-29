@@ -198,10 +198,10 @@ function validarContrasena(pass){
         }; 
     }
 
-    if (pass.length < 8 || pass.length > 20) {
+    if (pass.length < 4 || pass.length > 10) {
         return { 
             valido: false, 
-            mensaje: "La contraseña debe tener entre 8 y 20 caracteres." 
+            mensaje: "La contraseña debe tener entre 4 y 10 caracteres." 
         }; 
     }
     return { valido: true, mensaje: "Contraseña válida." };
