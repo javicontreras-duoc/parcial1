@@ -37,3 +37,10 @@ function updateCartCounter(){
 }
 
 document.addEventListener("DOMContentLoaded", updateCartCounter);
+
+// Ocultar pantalla de carga automáticamente al terminar de cargar las imágenes y scripts 
+window.addEventListener("load", () => { 
+    const preloader = document.getElementById("preloader"); 
+    if (preloader) { preloader.classList.add("hidden"); 
+    } 
+});

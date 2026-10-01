@@ -7,11 +7,19 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- encabezado y navegación principal -->
-    <header class="header-main">
-        <div class="logo-container">
-            <a href="index.html" class="brand-logo">📖 The One Page</a>
+    <!-- Pantalla de Carga -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <img src="img/logo.png" alt="Cargando The One Page..." class="preloader-logo">
+            <div class="spinner"></div>
         </div>
+    </div>
+
+    <!-- Encabezado y Navegación Principal -->
+    <header class="header-main">
+        <a href="index.html" class="brand-logo">
+            <img src="img/logo.png" alt="The One Page Logo" class="header-logo">
+        </a>
 
         <nav class="nav-menu">
             <ul>
@@ -86,11 +94,13 @@
         </section>
     </main>
 
-    <!-- pie de página -->
+    <!-- Pie de Página (Footer) -->
     <footer class="footer-main">
         <div class="footer-container">
             <div class="footer-info">
-                <h3>The One Page</h3>
+                <a href="index.html" class="brand-logo">
+                    <img src="img/logo.png" alt="The One Page Logo" class="header-logo">
+                </a>
                 <p>&copy; 2026 Todos los derechos reservados.</p>
             </div>
 

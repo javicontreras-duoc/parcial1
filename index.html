@@ -7,11 +7,19 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+    <!-- Pantalla de Carga -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <img src="img/logo.png" alt="Cargando The One Page..." class="preloader-logo">
+            <div class="spinner"></div>
+        </div>
+    </div>
+
     <!-- Encabezado y Navegación Principal -->
     <header class="header-main">
-        <div class="logo-container">
-            <a href="index.html" class="brand-logo">📖 The One Page</a>
-        </div>
+        <a href="index.html" class="brand-logo">
+            <img src="img/logo.png" alt="The One Page Logo" class="header-logo">
+        </a>
 
         <nav class="nav-menu">
             <ul>
@@ -41,20 +49,30 @@
             </div>
         </section>
 
-    <!-- Lista de Mangas Destacados -->
-    <section class="featured-mangas">
-        <h2>Mangas destacados</h2>
-        <div class="manga-grid" id="featured-mangas-container">
-            <!-- Renderizado dinámico desde JS -->
-        </div>
-    </section>
+        <!-- Lista de Mangas Destacados -->
+        <section class="main-content">
+            <div class="catalog-header">
+                <h1>🔥 MANGA DESTACADOS</h1>
+                <p>Descubre los tomos más vendidos y las últimas novedades de nuestra tienda.</p>
+            </div>
+
+            <div class="product-grid" id="featured-products-container">
+                <!-- Renderizado dinámico desde JavaScript -->
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="productos.html" class="btn-primary">Ver Catálogo Completo &rarr;</a>
+            </div>
+        </section>
     </main>
 
     <!-- Pie de Página (Footer) -->
     <footer class="footer-main">
         <div class="footer-container">
             <div class="footer-info">
-                <h3>The One Page</h3>
+                <a href="index.html" class="brand-logo">
+                    <img src="img/logo.png" alt="The One Page Logo" class="header-logo">
+                </a>
                 <p>&copy; 2026 Todos los derechos reservados.</p>
             </div>
 
@@ -71,6 +89,29 @@
     <!-- Scripts JS Modulares -->
     <script src="js/products.js"></script>
     <script src="js/cart.js"></script>
-    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderizarDestacados();
+        });
+
+        function renderizarDestacados() {
+            const container = document.getElementById("featured-products-container");
+            if(!container) return;
+
+            const destacados = productosIniciales.slice(0, 3);
+            
+            container.innerHTML = destacados.map(producto => `
+                <article class="product-card">
+                    <a href="detalle-producto.html?id=${producto.id}">                        
+                        <img src="${producto.imagen}" alt="${producto.nombre}">                        
+                    </a>
+                    <span class="category-badge">${producto.categoria}</span>
+                    <h3><a href="detalle-producto.html?id=${producto.id}">${producto.nombre}</a></h3>
+                    <p class="price">$${producto.precio.toLocaleString('es-CL')}</p>
+                    <button onclick="addToCart(${producto.id})" class="btn-secondary">Agregar al carrito</button>
+                </article>
+            `).join('');
+        }
+    </script>
 </body>
 </html>

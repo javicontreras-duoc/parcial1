@@ -1,43 +1,46 @@
 /* ==========================================================================
-   THE ONE PAGE - HOJA DE ESTILOS PRINCIPAL (styles.css)
+   THE ONE PAGE - HOJA DE ESTILOS INSPIRADA EN BANANA MANGA STORE (styles-v5.css)
    Tienda de Mangas - Evaluación Parcial 1 (DSY1104)
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. VARIABLES GLOBALES Y RESET DE ESTILOS
+   1. VARIABLES GLOBALES Y RESET DE ESTILOS (Paleta Banana / Manga Store)
    -------------------------------------------------------------------------- */
 :root {
-  --primary-color: #2b580c;       /* Verde profundo marca */
-  --primary-hover: #1e3f08;
-  --accent-color: #639a67;        /* Verde claro de acento */
-  --bg-light: #f4f6f8;            /* Fondo principal claro */
-  --bg-card: #ffffff;             /* Fondo tarjetas y módulos */
-  --text-dark: #222222;           /* Texto principal */
-  --text-muted: #666666;          /* Texto secundario */
-  --border-color: #e0e0e0;        /* Bordes generales */
+  --primary-color: #facc15;       /* Amarillo Banano Vibrante */
+  --primary-hover: #eab308;       /* Amarillo/Ámbar al pasar el cursor */
+  --primary-dark: #d97706;        /* Tono dorado oscuro */
+  --dark-bg: #18181b;             /* Negro Carbón / Oscuro elegante */
+  --dark-hover: #27272a;          /* Negro suave */
+  --accent-color: #18181b;        /* Contraste oscuro principal */
+  --bg-light: #f8fafc;            /* Fondo general claro suave */
+  --bg-card: #ffffff;             /* Fondo blanco para tarjetas */
+  --text-dark: #0f172a;           /* Texto oscuro de alta legibilidad */
+  --text-muted: #64748b;          /* Texto secundario gris */
+  --border-color: #e2e8f0;        /* Bordes sutiles */
   
   /* Colores de Estado y Alertas */
-  --danger-color: #d9534f;        /* Stock crítico / Errores */
-  --danger-bg: #fdf2f2;
-  --success-color: #5cb85c;       /* Éxito / Stock Ok */
-  --warning-color: #f0ad4e;       /* Rol Vendedor / Advertencia */
+  --danger-color: #ef4444;        /* Stock crítico / Errores (Rojo vivo) */
+  --danger-bg: #fef2f2;
+  --success-color: #22c55e;       /* Éxito / Stock Ok */
+  --warning-color: #f59e0b;       /* Rol Vendedor / Advertencia */
   
   /* Layout y Sombras */
   --sidebar-width: 260px;
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-  --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
-  --transition: all 0.25s ease-in-out;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 14px rgba(0,0,0,0.08);
+  --shadow-lg: 0 10px 25px rgba(0,0,0,0.12);
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
 }
 
 body {
@@ -50,7 +53,7 @@ body {
 }
 
 a {
-  color: var(--primary-color);
+  color: var(--dark-bg);
   text-decoration: none;
   transition: var(--transition);
 }
@@ -66,15 +69,16 @@ img {
 }
 
 /* --------------------------------------------------------------------------
-   2. ENCABEZADO Y NAVEGACIÓN PÚBLICA (Header & Nav)
+   2. ENCABEZADO Y NAVEGACIÓN PÚBLICA (Estilo Banana Manga Store)
    -------------------------------------------------------------------------- */
 .header-main {
-  background-color: var(--bg-card);
+  background-color: var(--dark-bg);
+  color: #ffffff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  box-shadow: var(--shadow-sm);
+  padding: 0.9rem 2rem;
+  box-shadow: var(--shadow-md);
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -82,20 +86,29 @@ img {
 }
 
 .brand-logo {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: var(--primary-color);
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--primary-color) !important;
   letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.header-logo {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
 }
 
 .nav-menu ul {
   display: flex;
   list-style: none;
-  gap: 1.2rem;
+  gap: 1.4rem;
 }
 
 .nav-menu a {
-  color: var(--text-dark);
+  color: #e2e8f0;
   font-weight: 600;
   font-size: 0.95rem;
   padding: 0.4rem 0;
@@ -110,11 +123,12 @@ img {
 .nav-menu a.active::after {
   content: '';
   position: absolute;
-  bottom: 0;
+  bottom: -2px;
   left: 0;
   width: 100%;
-  height: 2px;
+  height: 3px;
   background-color: var(--primary-color);
+  border-radius: 2px;
 }
 
 .user-cart-actions {
@@ -126,7 +140,7 @@ img {
 .btn-link {
   font-weight: 600;
   font-size: 0.9rem;
-  color: var(--text-muted);
+  color: #cbd5e1;
 }
 
 .btn-link:hover, 
@@ -136,24 +150,26 @@ img {
 
 .cart-btn {
   background-color: var(--primary-color);
-  color: #ffffff !important;
-  padding: 0.55rem 1.1rem;
-  border-radius: var(--radius-sm);
-  font-weight: 700;
+  color: var(--dark-bg) !important;
+  padding: 0.55rem 1.2rem;
+  border-radius: 20px;
+  font-weight: 800;
   font-size: 0.9rem;
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  box-shadow: 0 2px 6px rgba(43, 88, 12, 0.25);
+  box-shadow: 0 4px 12px rgba(250, 204, 21, 0.3);
+  transition: var(--transition);
 }
 
 .cart-btn:hover {
   background-color: var(--primary-hover);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(250, 204, 21, 0.4);
 }
 
 /* --------------------------------------------------------------------------
-   3. CONTENEDOR PRINCIPAL Y HERO BANNER
+   3. CONTENEDOR PRINCIPAL Y HERO BANNER (Banana Style)
    -------------------------------------------------------------------------- */
 .main-content {
   flex: 1;
@@ -164,31 +180,46 @@ img {
 }
 
 .hero-banner {
-  background: linear-gradient(135deg, #1b3a08 0%, #3a7512 100%);
+  background: linear-gradient(135deg, #18181b 0%, #27272a 60%, #3f3204 100%);
   color: #ffffff;
   padding: 3.5rem 2rem;
   border-radius: var(--radius-lg);
   text-align: center;
   margin-bottom: 2.5rem;
   box-shadow: var(--shadow-md);
+  border: 1px solid rgba(250, 204, 21, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-banner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(250, 204, 21, 0.15) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .hero-text h1 {
-  font-size: 2.4rem;
+  font-size: 2.5rem;
   font-weight: 900;
-  letter-spacing: 1px;
+  letter-spacing: -0.5px;
   margin-bottom: 0.8rem;
+  color: var(--primary-color);
 }
 
 .hero-text p {
   font-size: 1.15rem;
-  opacity: 0.9;
+  color: #f1f5f9;
   max-width: 600px;
   margin: 0 auto 1.5rem auto;
 }
 
 /* --------------------------------------------------------------------------
-   4. CATÁLOGO Y TARJETAS DE PRODUCTOS (Grid & Cards)
+   4. CATÁLOGO Y TARJETAS DE PRODUCTOS (3 Por Fila, Compactas Estilo Manga)
    -------------------------------------------------------------------------- */
 .catalog-header {
   text-align: center;
@@ -197,7 +228,8 @@ img {
 
 .catalog-header h1 {
   font-size: 2rem;
-  color: var(--primary-color);
+  color: var(--dark-bg);
+  font-weight: 800;
   margin-bottom: 0.5rem;
 }
 
@@ -211,20 +243,22 @@ img {
 
 .filter-btn {
   background-color: var(--bg-card);
-  border: 1px solid var(--border-color);
+  border: 2px solid var(--border-color);
   color: var(--text-dark);
-  padding: 0.5rem 1.2rem;
-  border-radius: 20px;
-  font-weight: 600;
+  padding: 0.5rem 1.3rem;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 0.9rem;
   cursor: pointer;
   transition: var(--transition);
 }
 
 .filter-btn:hover, 
 .filter-btn.active {
-  background-color: var(--primary-color);
-  color: #ffffff;
-  border-color: var(--primary-color);
+  background-color: var(--dark-bg);
+  color: var(--primary-color);
+  border-color: var(--dark-bg);
+  box-shadow: 0 4px 10px rgba(24, 24, 27, 0.2);
 }
 
 .product-grid {
@@ -237,7 +271,7 @@ img {
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 0.8rem;
+  padding: 0.9rem;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -248,13 +282,13 @@ img {
 }
 
 .product-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
   box-shadow: var(--shadow-md);
-  border-color: var(--accent-color);
+  border-color: var(--primary-color);
 }
 
 .product-card img {
-  height: 150px;
+  height: 155px;
   object-fit: contain;
   margin: 0 auto 0.5rem auto;
   border-radius: var(--radius-sm);
@@ -262,13 +296,14 @@ img {
 
 .category-badge {
   display: inline-block;
-  background-color: #e8f5e9;
+  background-color: var(--dark-bg);
   color: var(--primary-color);
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.2rem 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.2rem 0.7rem;
   border-radius: 12px;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
   margin-bottom: 0.5rem;
   align-self: center;
 }
@@ -285,18 +320,18 @@ img {
 }
 
 .product-card h3 a:hover {
-  color: var(--primary-color);
+  color: var(--primary-dark);
 }
 
 .product-card .price {
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: var(--primary-color);
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--dark-bg);
   margin-bottom: 0.6rem;
 }
 
 /* --------------------------------------------------------------------------
-   5. DETALLE DE PRODUCTO (Ficha Técnica)
+   5. DETALLE DE PRODUCTO (Ficha Técnica Estilo Banana Manga)
    -------------------------------------------------------------------------- */
 .breadcrumbs {
   margin-bottom: 1.5rem;
@@ -321,7 +356,7 @@ img {
   max-height: 420px;
   object-fit: contain;
   border-radius: var(--radius-md);
-  background-color: #fafafa;
+  background-color: #f8fafc;
   border: 1px solid var(--border-color);
 }
 
@@ -338,22 +373,23 @@ img {
 
 .detail-info-box h1 {
   font-size: 2.2rem;
-  color: var(--text-dark);
+  color: var(--dark-bg);
   margin-bottom: 0.8rem;
   line-height: 1.2;
+  font-weight: 800;
 }
 
 .detail-price {
   font-size: 2rem;
   font-weight: 900;
-  color: var(--primary-color);
+  color: var(--dark-bg);
   margin-bottom: 1.2rem;
 }
 
 .stock-status {
   margin-bottom: 1.5rem;
   padding: 0.8rem 1rem;
-  background-color: #f9f9f9;
+  background-color: #f8fafc;
   border-radius: var(--radius-sm);
   border-left: 4px solid var(--primary-color);
 }
@@ -387,7 +423,7 @@ img {
 .quantity-selector input {
   width: 70px;
   padding: 0.6rem;
-  border: 1px solid var(--border-color);
+  border: 2px solid var(--border-color);
   border-radius: var(--radius-sm);
   text-align: center;
   font-weight: bold;
@@ -398,8 +434,9 @@ img {
    -------------------------------------------------------------------------- */
 .cart-section h1 {
   font-size: 2rem;
-  color: var(--primary-color);
+  color: var(--dark-bg);
   margin-bottom: 0.3rem;
+  font-weight: 800;
 }
 
 .cart-subtitle {
@@ -430,9 +467,9 @@ img {
 }
 
 .cart-table th {
-  background-color: #f8f9fa;
+  background-color: var(--dark-bg);
+  color: #ffffff;
   font-weight: 700;
-  color: var(--text-dark);
 }
 
 .cart-img-col img {
@@ -463,7 +500,7 @@ img {
 .cart-summary-card h3 {
   font-size: 1.3rem;
   margin-bottom: 1.2rem;
-  border-bottom: 2px solid var(--primary-color);
+  border-bottom: 3px solid var(--primary-color);
   padding-bottom: 0.5rem;
 }
 
@@ -476,7 +513,8 @@ img {
 
 .total-line {
   font-size: 1.3rem;
-  color: var(--primary-color);
+  color: var(--dark-bg);
+  font-weight: 900;
   margin-top: 1rem;
 }
 
@@ -522,9 +560,10 @@ img {
 .register-card h1, 
 .contact-card h1 {
   font-size: 1.8rem;
-  color: var(--primary-color);
+  color: var(--dark-bg);
   margin-bottom: 0.4rem;
   text-align: center;
+  font-weight: 800;
 }
 
 .login-subtitle, 
@@ -555,7 +594,7 @@ img {
 .form-group textarea {
   width: 100%;
   padding: 0.75rem 0.9rem;
-  border: 1px solid var(--border-color);
+  border: 1.5px solid var(--border-color);
   border-radius: var(--radius-sm);
   font-size: 0.95rem;
   transition: var(--transition);
@@ -566,9 +605,9 @@ img {
 .form-group select:focus, 
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--primary-color);
+  border-color: var(--dark-bg);
   background-color: #ffffff;
-  box-shadow: 0 0 0 3px rgba(43, 88, 12, 0.1);
+  box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.25);
 }
 
 .form-grid-2col {
@@ -577,40 +616,35 @@ img {
   gap: 1.2rem;
 }
 
-.char-counter {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  text-align: right;
-  margin-top: 0.2rem;
-}
-
 /* --------------------------------------------------------------------------
-   8. BOTONES Y COMPONENTES REUTILIZABLES
+   8. BOTONES Y COMPONENTES REUTILIZABLES (Estilo Banana)
    -------------------------------------------------------------------------- */
 .btn-primary {
   background-color: var(--primary-color);
-  color: #ffffff;
+  color: var(--dark-bg);
   border: none;
-  padding: 0.8rem 1.6rem;
+  padding: 0.82rem 1.6rem;
   border-radius: var(--radius-sm);
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.95rem;
   cursor: pointer;
   transition: var(--transition);
   text-align: center;
   display: inline-block;
+  box-shadow: 0 4px 10px rgba(250, 204, 21, 0.25);
 }
 
 .btn-primary:hover {
   background-color: var(--primary-hover);
-  color: #ffffff;
+  color: var(--dark-bg);
+  transform: translateY(-1px);
 }
 
 .btn-secondary {
-  background-color: var(--accent-color);
+  background-color: var(--dark-bg);
   color: #ffffff;
   border: none;
-  padding: 0.7rem 1.3rem;
+  padding: 0.75rem 1.4rem;
   border-radius: var(--radius-sm);
   font-weight: 700;
   cursor: pointer;
@@ -620,8 +654,8 @@ img {
 }
 
 .btn-secondary:hover {
-  background-color: #4f8053;
-  color: #ffffff;
+  background-color: var(--dark-hover);
+  color: var(--primary-color);
 }
 
 .btn-block {
@@ -630,9 +664,9 @@ img {
 }
 
 .btn-action-sm {
-  background-color: #f0f4f8;
-  color: var(--primary-color);
-  border: 1px solid #d0dbe5;
+  background-color: #f1f5f9;
+  color: var(--dark-bg);
+  border: 1px solid #cbd5e1;
   padding: 0.35rem 0.7rem;
   border-radius: var(--radius-sm);
   font-size: 0.82rem;
@@ -643,7 +677,7 @@ img {
 .btn-danger-sm {
   background-color: var(--danger-bg);
   color: var(--danger-color);
-  border: 1px solid #f5c6cb;
+  border: 1px solid #fca5a5;
   padding: 0.35rem 0.7rem;
   border-radius: var(--radius-sm);
   font-size: 0.82rem;
@@ -683,104 +717,71 @@ img {
 }
 
 .value-card h3 {
-  color: var(--primary-color);
+  color: var(--dark-bg);
   margin-bottom: 0.6rem;
 }
 
-.blog-header {
-  text-align: center;
-  margin-bottom: 2.5rem;
+.developer-card {
+  margin-top: 2.5rem;
 }
 
-.blogs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 2rem;
-}
-
-.blog-card {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
+.developer-box {
   display: flex;
-  flex-direction: column;
-}
-
-.blog-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-.blog-card-body {
+  gap: 1.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 1.2rem;
+  background-color: #fefce8;
   padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.blog-date {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  margin-bottom: 0.4rem;
-}
-
-.blog-card-body h2 {
-  font-size: 1.2rem;
-  margin-bottom: 0.8rem;
-  line-height: 1.3;
-}
-
-.blog-detail-container {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 3rem;
-  max-width: 900px;
-  margin: 0 auto 2rem auto;
-  box-shadow: var(--shadow-md);
-}
-
-.blog-post-header h1 {
-  font-size: 2.2rem;
-  color: var(--text-dark);
-  margin-bottom: 0.8rem;
-}
-
-.blog-meta {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  margin-bottom: 2rem;
-}
-
-.blog-post-image img {
-  width: 100%;
-  max-height: 400px;
-  object-fit: cover;
   border-radius: var(--radius-md);
-  margin-bottom: 2rem;
+  border: 1px solid #fef08a;
 }
 
-.blog-post-body p {
-  margin-bottom: 1.2rem;
-  font-size: 1.05rem;
+.developer-avatar {
+  font-size: 2.8rem;
+  background: var(--primary-color);
+  color: var(--dark-bg);
+  padding: 1rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 75px;
+  height: 75px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(250, 204, 21, 0.4);
 }
 
-.blog-post-body blockquote {
-  border-left: 4px solid var(--primary-color);
-  padding-left: 1.2rem;
-  margin: 1.8rem 0;
-  font-style: italic;
-  color: var(--text-muted);
+.developer-info {
+  flex: 1;
+  min-width: 260px;
+}
+
+.developer-name {
+  color: var(--dark-bg);
+  font-size: 1.3rem;
+  margin-bottom: 0.2rem;
+  font-weight: 800;
+}
+
+.developer-role {
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 0.6rem;
+  font-size: 0.95rem;
+}
+
+.developer-desc {
+  color: var(--text-dark);
+  font-size: 0.92rem;
+  line-height: 1.6;
 }
 
 /* --------------------------------------------------------------------------
    10. LAYOUT Y PANEL ADMINISTRATIVO (Admin Dashboard)
    -------------------------------------------------------------------------- */
 .admin-body {
-  background-color: #f0f2f5;
+  background-color: #f1f5f9;
 }
 
 .admin-layout {
@@ -790,7 +791,7 @@ img {
 
 .admin-sidebar {
   width: var(--sidebar-width);
-  background-color: #1a2515;
+  background-color: #0f172a;
   color: #ffffff;
   padding: 1.8rem 1.2rem;
   display: flex;
@@ -806,11 +807,11 @@ img {
 
 .sidebar-brand h2 {
   font-size: 1.3rem;
-  color: #ffffff;
+  color: var(--primary-color);
 }
 
 .sidebar-brand small {
-  color: var(--accent-color);
+  color: #94a3b8;
 }
 
 .role-selector-box {
@@ -824,7 +825,7 @@ img {
   display: block;
   font-size: 0.8rem;
   margin-bottom: 0.3rem;
-  color: #cccccc;
+  color: #cbd5e1;
 }
 
 .role-selector-box select {
@@ -843,7 +844,7 @@ img {
 }
 
 .admin-nav a {
-  color: #dddddd;
+  color: #cbd5e1;
   padding: 0.75rem 1rem;
   border-radius: var(--radius-sm);
   display: block;
@@ -854,11 +855,12 @@ img {
 .admin-nav a:hover, 
 .admin-nav a.active {
   background-color: var(--primary-color);
-  color: #ffffff;
+  color: var(--dark-bg);
+  font-weight: 800;
 }
 
 .logout-btn {
-  color: #ff8888 !important;
+  color: #fca5a5 !important;
   margin-top: 2rem;
 }
 
@@ -881,12 +883,13 @@ img {
 
 .admin-header h1 {
   font-size: 1.5rem;
-  color: var(--text-dark);
+  color: var(--dark-bg);
+  font-weight: 800;
 }
 
 .badge-role {
-  background-color: var(--primary-color);
-  color: #ffffff;
+  background-color: var(--dark-bg);
+  color: var(--primary-color);
   padding: 0.25rem 0.7rem;
   border-radius: 12px;
   font-size: 0.8rem;
@@ -925,7 +928,7 @@ img {
 .metric-value {
   font-size: 1.8rem;
   font-weight: 800;
-  color: var(--text-dark);
+  color: var(--dark-bg);
 }
 
 .alert-card {
@@ -945,10 +948,6 @@ img {
   border: 1px solid var(--border-color);
 }
 
-.section-header {
-  margin-bottom: 1.2rem;
-}
-
 .admin-table {
   width: 100%;
   border-collapse: collapse;
@@ -963,7 +962,7 @@ img {
 }
 
 .admin-table th {
-  background-color: #fafafa;
+  background-color: #f8fafc;
   font-weight: 700;
 }
 
@@ -971,89 +970,93 @@ img {
   background-color: var(--danger-bg);
 }
 
-.status-badge {
-  padding: 0.2rem 0.6rem;
-  border-radius: 10px;
-  font-size: 0.78rem;
-  font-weight: 700;
-}
-
 .status-badge.success {
-  background-color: #e8f5e9;
-  color: var(--success-color);
+  background-color: #dcfce7;
+  color: #15803d;
 }
 
 .status-badge.danger {
-  background-color: #fde8e8;
+  background-color: #fee2e2;
   color: var(--danger-color);
 }
 
-.role-badge {
-  padding: 0.2rem 0.6rem;
-  border-radius: 10px;
-  font-size: 0.78rem;
-  font-weight: 700;
-}
-
 .role-badge.administrador {
-  background-color: #e8f5e9;
-  color: var(--primary-color);
+  background-color: #fef9c3;
+  color: #854d0e;
 }
 
 .role-badge.vendedor {
-  background-color: #fff8e1;
-  color: #b78103;
+  background-color: #ffedd5;
+  color: #c2410c;
 }
 
 .role-badge.cliente {
-  background-color: #e3f2fd;
-  color: #1976d2;
-}
-
-.alert-box-warning {
-  background-color: #fff3cd;
-  color: #856404;
-  border: 1px solid #ffeeba;
-  padding: 0.8rem 1rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.9rem;
-}
-
-.table-header-controls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.2rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.search-filter-box {
-  display: flex;
-  gap: 0.8rem;
-}
-
-.search-filter-box input, 
-.search-filter-box select {
-  padding: 0.5rem 0.8rem;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
-}
-
-.form-actions-bar {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  background-color: #e0f2fe;
+  color: #0369a1;
 }
 
 /* --------------------------------------------------------------------------
-   11. PIE DE PÁGINA (Footer)
+   11. PANTALLA DE CARGA (PRELOADER) Y LOGO
+   -------------------------------------------------------------------------- */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #18181b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+#preloader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.preloader-content {
+  text-align: center;
+}
+
+.preloader-logo {
+  width: 130px;
+  height: auto;
+  margin-bottom: 1.2rem;
+  animation: pulseLogo 1.5s infinite ease-in-out;
+}
+
+@keyframes pulseLogo {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 4px solid #3f3f46;
+  border-top: 4px solid var(--primary-color);
+  border-radius: 50%;
+  margin: 0 auto;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* --------------------------------------------------------------------------
+   12. PIE DE PÁGINA (Footer) Y MEDIA QUERIES
    -------------------------------------------------------------------------- */
 .footer-main {
-  background-color: #1a2515;
+  background-color: #0f172a;
   color: #ffffff;
   padding: 2.5rem 2rem;
   margin-top: auto;
+  border-top: 3px solid var(--primary-color);
 }
 
 .footer-container {
@@ -1067,12 +1070,12 @@ img {
 }
 
 .footer-info h3 {
-  color: var(--accent-color);
+  color: var(--primary-color);
   margin-bottom: 0.4rem;
 }
 
 .footer-info p {
-  color: #bbbbbb;
+  color: #94a3b8;
   font-size: 0.88rem;
 }
 
@@ -1093,111 +1096,18 @@ img {
   font-size: 0.9rem;
 }
 
-/* --------------------------------------------------------------------------
-   12. DISEÑO RESPONSIVO (Media Queries)
-   -------------------------------------------------------------------------- */
-@media (max-width: 992px) {
-  .detail-card {
-    grid-template-columns: 1fr;
-  }
-  
-  .admin-layout {
-    flex-direction: column;
-  }
-  
-  .admin-sidebar {
-    width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
-  .header-main {
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
-  }
-  
-  .nav-menu ul {
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  
-  .form-grid-2col {
-    grid-template-columns: 1fr;
-  }
-  
-  .footer-container {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .newsletter-box form {
-    flex-direction: column;
-  }
-}
-
-
-/* --------------------------------------------------------------------------
-   13. SECCIÓN DESARROLLADORES (Nosotros)
-   -------------------------------------------------------------------------- */
-.developer-card {
-  margin-top: 2.5rem;
-}
-
-.developer-box {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-top: 1.2rem;
-  background-color: #f9fbf8;
-  padding: 1.5rem;
-  border-radius: var(--radius-md);
-  border: 1px solid #e2ebd9;
-}
-
-.developer-avatar {
-  font-size: 2.8rem;
-  background: #e8f5e9;
-  padding: 1rem;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 75px;
-  height: 75px;
-  flex-shrink: 0;
-}
-
-.developer-info {
-  flex: 1;
-  min-width: 260px;
-}
-
-.developer-name {
-  color: var(--primary-color);
-  font-size: 1.3rem;
-  margin-bottom: 0.2rem;
-}
-
-.developer-role {
-  font-weight: 700;
-  color: var(--text-dark);
-  margin-bottom: 0.6rem;
-  font-size: 0.95rem;
-}
-
-.developer-desc {
-  color: var(--text-muted);
-  font-size: 0.92rem;
-  line-height: 1.6;
-}
-
-
 @media (max-width: 992px) {
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .detail-card {
+    grid-template-columns: 1fr;
+  }
+  .admin-layout {
+    flex-direction: column;
+  }
+  .admin-sidebar {
+    width: 100%;
   }
 }
 
@@ -1205,4 +1115,23 @@ img {
   .product-grid {
     grid-template-columns: 1fr;
   }
+  .header-main {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.error-msg {
+  color: #dc2626;
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-top: 0.35rem;
+  display: block;
+}
+
+.form-group input.input-error,
+.form-group select.input-error,
+.form-group textarea.input-error {
+  border-color: #dc2626;
+  background-color: #fef2f2;
 }
