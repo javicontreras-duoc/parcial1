@@ -173,12 +173,12 @@
                 // se le ocultan las opciones de gestión de usuarios y ajustes de administración.
                 if (navUsersItem) navUsersItem.style.display = "none";
                 if (btnQuickUser) btnQuickUser.style.display = "none";
-                alert("Modo Vendedor Activado: Se han ocultado las opciones de administración de usuarios.");
+                showToast("Modo Vendedor Activado: Se han ocultado las opciones de administración de usuarios.", "success");
             } else {
                 badge.style.backgroundColor = "#2b580c";
                 if (navUsersItem) navUsersItem.style.display = "block";
                 if (btnQuickUser) btnQuickUser.style.display = "inline-block";
-                alert("Modo Administrador Activado: Acceso total restablecido.");
+                showToast("Modo Administrador Activado: Acceso total restablecido.", "success");
             }
         }
     </script>

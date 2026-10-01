@@ -324,7 +324,7 @@
                     regionValida && 
                     comunaValida && 
                     resDireccion.valido) {
-                        alert("¡Registro exitoso!");
+                        showToast("¡Registro exitoso!", "success");
                         form.reset();
                         actualizarComunas("region", "comuna");
                 }

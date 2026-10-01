@@ -467,7 +467,7 @@
                     }
 
                     guardarUsuarios(usuarios);
-                    alert(userId ? "¡Usuario actualizado con éxito!" : "¡Nuevo usuario creado con éxito!");
+                    showToast(userId ? "¡Usuario actualizado con éxito!" : "¡Nuevo usuario creado con éxito!", "success");
                     ocultarFormulario();
                     }
                 });

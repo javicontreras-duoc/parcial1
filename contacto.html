@@ -154,7 +154,7 @@
                 mostrarError("comentario", resComentario.valido ? "" : resComentario.mensaje);
 
                 if (resNombre.valido && resCorreo.valido && resComentario.valido) {
-                    alert("¡Mensaje enviado con éxito!");
+                    showToast("¡Mensaje enviado con éxito!", "success");
                     form.reset();
                     comentarioCount.textContent = "0";
                     limpiarError("nombre");

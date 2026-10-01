@@ -145,7 +145,7 @@
             const cantidad = parseInt(qtyInput ? qtyInput.value : 1, 10);
             
             if(isNaN(cantidad) || cantidad < 1){
-                alert("Por favor seleccione una cantidad válida.");
+                showToast("Por favor seleccione una cantidad válida.", "error");
                 return;
             }
 
@@ -163,7 +163,7 @@
 
             saveCart(cart);
             updateCartCounter();
-            alert(`Se han añadido ${cantidad} unidad(es) de este manga al carrito.`)
+            showToast(`Se han añadido ${cantidad} unidad(es) de este manga al carrito.`, "success");
         }
 
         function cargarProductosRelacionados(productoActual){

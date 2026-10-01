@@ -24,7 +24,7 @@ function addToCart(productId) {
     }
 
     saveCart(cart)
-    alert("Producto añadido al carrito correctamente.");
+    showToast("¡Manga añadido al carrito exitosamente!", "success");
 }
 
 function updateCartCounter(){
@@ -44,3 +44,28 @@ window.addEventListener("load", () => {
     if (preloader) { preloader.classList.add("hidden"); 
     } 
 });
+
+function showToast(mensaje, tipo = "success") {
+    let container = document.getElementById("toast-container");
+
+    if (!container) {
+        container = document.createElement("div");
+        container.id = "toast-container";
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement("div");
+    toast.className = `toast ${tipo}`;
+
+    const icono = tipo === "success" ? "✅" : tipo === "error" ? "❌" : "⚠️";
+    toast.innerHTML = `
+        <span>${icono}</span> 
+        <span>${mensaje}</span>
+        `;
+
+        container.appendChild(toast);
+
+        setTimeout(() => {
+            toast.remove();
+        }, 3000);
+}

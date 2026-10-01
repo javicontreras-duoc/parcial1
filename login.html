@@ -130,7 +130,7 @@
                 mostrarError("contrasena", resContrasena.valido ? "" : resContrasena.mensaje);
 
                 if (resCorreo.valido && resContrasena.valido) {
-                    alert("¡Inicio de sesión exitoso! Bienvenido a The One Page.");
+                    showToast("¡Inicio de sesión exitoso! Bienvenido a The One Page.", "success");
                     form.reset();
                     limpiarError("correo");
                     limpiarError("contrasena");
