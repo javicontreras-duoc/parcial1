@@ -97,7 +97,7 @@ the-one-page/
 Las validaciones del lado del cliente son procesadas en tiempo real con mensajes destacados en **rojo y negrita** (`.error-msg`):
 
 1. **Validación de RUN Chileno:** Algoritmo **Módulo 11** para la verificación del dígito verificador (Formatos permitidos: 7 a 9 dígitos sin puntos ni guion).
-2. **Restricción de Correo Electrónico:** Validación mediante expresiones regulares strictly permitiendo dominios `@gmail.com`, `@duoc.cl` y `@profesor.duoc.cl`.
+2. **Restricción de Correo Electrónico:** Validación mediante expresiones regulares strictly permitiendo dominios `@gmail.com`.
 3. **Contraseñas:** Longitud obligatoria entre 4 y 10 caracteres.
 4. **Campos Numéricos (Precio / Stock):** Verificación de valores positivos superiores a $0 y números enteros en inventario.
 5. **Alerta de Stock Crítico:** Disparo automático de advertencia cuando el stock actual es menor o igual al umbral crítico definido.
